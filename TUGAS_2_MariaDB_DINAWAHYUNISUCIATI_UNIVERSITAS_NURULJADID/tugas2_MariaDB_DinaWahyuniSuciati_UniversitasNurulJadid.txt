@@ -1,0 +1,362 @@
+Microsoft Windows [Version 10.0.19043.2006]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysql -u root -p db_pegawai
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 514
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [db_pegawai]> SHOW TABLES;
++----------------------+
+| Tables_in_db_pegawai |
++----------------------+
+| master               |
+| pegawai              |
++----------------------+
+2 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-----+----------------------+--------+-------------+------------+----------+-------------+
+| id | nip | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-----+----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123 | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
++----+-----+----------------------+--------+-------------+------------+----------+-------------+
+1 row in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM master;
++----+-----------+
+| id | nama      |
++----+-----------+
+|  1 | SDM       |
+|  2 | Keuangan  |
+|  3 | Marketing |
+|  4 | IT        |
++----+-----------+
+4 rows in set (0.003 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (87373,'Sayyid Rofiq Bafaqih','l','Situbondo','1998-12-05',1,'Bungatan'),
+    -> (738362,'Nana Bafaqih','p','Probolinggo','2001-07-02',1,'Besuk');
+Query OK, 2 rows affected, 1 warning (0.114 sec)
+Records: 2  Duplicates: 0  Warnings: 1
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai;
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih         | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+3 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (82667,'sayyid fikri alhamid','l','Probolinggo','2000-08-10',1,'Kraksaan'),
+    -> (67368,'Wilda Ayuni Puspita','p','Probolinggo','2008-10-02',1,'Krampilan');
+Query OK, 2 rows affected (0.114 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih         | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita  | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+5 rows in set (0.010 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (73920,'Endang Sugianti','p','Bondowoso','1985-08-05',2,'Creme'),
+    -> (83702,'Sudarman','l','Probolinggo','1982-07-24',2,'Besuk'),
+    -> (72910,'Hadi Baaly','l','Probolinggo','2001',2,'Alastengah'),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 4
+MariaDB [db_pegawai]> INSERT INTO pegawai (nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (11289,'Endang Sugianti','p','Probolinggo'.'1985-08-05',2,'Krampilan');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.'1985-08-05',2,'Krampilan')' at line 2
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih         | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita  | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+5 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92719,'Sudarman','l','Probolinggo','1985-07-24',2,'Besuk'),
+    -> (28292,'Endang Sugianti','Probolinggo','1985-08-05',2,'Besuk'),
+    -> (79291,'Ahlia','Probolinggo','1994-07-03',2,'Alaskandang');k'),
+ERROR 1136 (21S01): Column count doesn't match value count at row 2
+    '> );
+    '> '
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'k'),
+);
+'
+)' at line 1
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92782,'Endang Sugianti','p','probolinggo','1985-08-05',2,'Krampilan');
+Query OK, 1 row affected (0.099 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih         | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita  | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti      | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+
+6 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92783,'Sudarman','l','Bondowoso','1992-10-01',2,'Creme'),
+    -> (92784,'Ahlia','p','Probolinggo','1994-09-09',2,'Pajarakan'),
+    -> (92785,'Ghaisan Ahmad Altamis','l','Probolinggo','2010-10-10',2,'Randu Jalak'),
+    -> (92786,'Bella Elena','p','Probolinggo','2021-09-14',2,'Randu Jalak');
+Query OK, 4 rows affected (0.105 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                  | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati  | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih  | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih          | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid  | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita   | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti       | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman              | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                 | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 92786 | Bella Elena           | p      | Probolinggo | 2021-09-14 |        2 | Randu Jalak |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+10 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir_tgl_lahir,idmaster,alamat)VALUES
+    -> (92787,'Amelia Prasasti','p','Probolinggo','2000-10-08',3,'Leces'),
+    -> (92788,'Muhammad Yunus','l','Probolinggo','1998-05-21',3,'Leces'),
+    -> (92789,'Putri Ayu Lestari','p','Probolingo','2001-08-20',3,'Alaskandang'),
+    -> (92790,'Adinda Citra Lestari','p','Malang','2010-02-10',3,'Malang'),
+    -> (92791,'Said Nur Muhammad','l','Mesir','2001-10-28',3,'Kairo');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                  | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati  | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih  | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih          | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid  | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita   | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti       | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman              | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                 | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 92786 | Bella Elena           | p      | Probolinggo | 2021-09-14 |        2 | Randu Jalak |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+10 rows in set (0.040 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92787,'Ahlia endar prawansa','p','Probolinggo','1999-09-08',3,'Besuk');
+Query OK, 1 row affected (0.124 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                  | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati  | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih  | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih          | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid  | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita   | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti       | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman              | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                 | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 92786 | Bella Elena           | p      | Probolinggo | 2021-09-14 |        2 | Randu Jalak |
+| 11 | 92787 | Ahlia endar prawansa  | p      | Probolinggo | 1999-09-08 |        3 | Besuk       |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+11 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai (nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92788,'Said Nur Muhammad','l','Mesir','1998-10-01',3,'kairo'),
+    -> (92789,'Muhammad Yunus','l','Probolinggo','1998-05-21',3,'Leces'),
+    -> (92790,'Putri Ayu Lestari','p','Malang','2001-08-20',3,'malang');
+Query OK, 3 rows affected (0.100 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                  | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati  | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih  | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih          | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid  | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita   | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti       | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman              | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                 | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 92786 | Bella Elena           | p      | Probolinggo | 2021-09-14 |        2 | Randu Jalak |
+| 11 | 92787 | Ahlia endar prawansa  | p      | Probolinggo | 1999-09-08 |        3 | Besuk       |
+| 12 | 92788 | Said Nur Muhammad     | l      | Mesir       | 1998-10-01 |        3 | kairo       |
+| 13 | 92789 | Muhammad Yunus        | l      | Probolinggo | 1998-05-21 |        3 | Leces       |
+| 14 | 92790 | Putri Ayu Lestari     | p      | Malang      | 2001-08-20 |        3 | malang      |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+
+14 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92791,'Isadur Rofiq','l','Situbondo','1998-12-05',3,'Bungatan'),
+    -> (92792,'Muhsin Baaly','l','Probolinggo','2000-10-06',4,'Alastengah'),
+    -> (92793,'Sayrifah Intan Khodijah','p','Prrbolinggo','2004-08-01',4,'Alaskandang');
+Query OK, 3 rows affected (0.161 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih    | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 92786 | Bella Elena             | p      | Probolinggo | 2021-09-14 |        2 | Randu Jalak |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       |
+| 13 | 92789 | Muhammad Yunus          | l      | Probolinggo | 1998-05-21 |        3 | Leces       |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+17 rows in set (0.027 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> (92794,'Muhammad Muhaimin','l','Bali','1998-10-25',4,'Tabanan'),
+    -> (92795,'Maulana Ishaq','l','Bali','1999-10-10',4,'Denpasar'),
+    -> (92796,'Amelia Putri','p','Probolinggo','1997-02-10',4,'Alastengah');
+Query OK, 3 rows affected (0.088 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 87373 | Sayyid Rofiq Bafaqih    | l      | Situbondo   | 1998-12-05 |        1 | Bungatan    |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 92786 | Bella Elena             | p      | Probolinggo | 2021-09-14 |        2 | Randu Jalak |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       |
+| 13 | 92789 | Muhammad Yunus          | l      | Probolinggo | 1998-05-21 |        3 | Leces       |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang |
+| 18 | 92794 | Muhammad Muhaimin       | l      | Bali        | 1998-10-25 |        4 | Tabanan     |
+| 19 | 92795 | Maulana Ishaq           | l      | Bali        | 1999-10-10 |        4 | Denpasar    |
+| 20 | 92796 | Amelia Putri            | p      | Probolinggo | 1997-02-10 |        4 | Alastengah  |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+20 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(nip,nama,gender,tmp_lahir,tgl_lahir,idmaster,alamat)VALUES
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 2
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=10928,gender='p',alamat='Probolinggo'
+    -> WHERE id=2;
+Query OK, 1 row affected (0.192 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=10289,gender='l',alamat='malang'
+    -> WHERE id=10;
+Query OK, 1 row affected (0.128 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=10294,gender='p',alamat='bali'
+    -> WHERE id=13;
+Query OK, 1 row affected (0.118 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=19208,gender,'l',alamat='surabaya'
+    -> WHERE id=20;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''l',alamat='surabaya'
+WHERE id=20' at line 1
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=10239,gender='l',alamat='surabaya'
+    -> WHERE id20;
+ERROR 1054 (42S22): Unknown column 'id20' in 'where clause'
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=38202,gender,'l',alamat='Surabaya
+    '> '
+    -> WHERE id=20;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''l',alamat='Surabaya
+'
+WHERE id=20' at line 1
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=91028,gender='l',alamat='surabaya'
+    -> WHERE id=20;
+Query OK, 1 row affected (0.146 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> UPDATE pegawai SET nip=29019,gender='p',alamat='malang'
+    -> WHERE id=18;
+Query OK, 1 row affected (0.095 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> DELETE FROM pegawai WHERE id=20;
+Query OK, 1 row affected (0.063 sec)
+
+MariaDB [db_pegawai]> DELETE FROM pegawai WHERE id=19;
+Query OK, 1 row affected (0.059 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+18 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]>

@@ -1,0 +1,48 @@
+Microsoft Windows [Version 10.0.19043.2006]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 71
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| dbpegawai          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.002 sec)
+
+MariaDB [(none)]> USE dbpegawai;
+Database changed
+MariaDB [dbpegawai]> show tables;
++---------------------+
+| Tables_in_dbpegawai |
++---------------------+
+| master              |
++---------------------+
+1 row in set (0.002 sec)
+
+MariaDB [dbpegawai]> create table pegawai(
+    -> id int primary key auto_increment,
+    -> nip char(5) not null unique,
+    -> nama varchar(30)not null,
+    -> gender enum('p','l') not null,
+    -> tmp_lahir varchar(30)not null,
+    -> tgl_lahir date not null,
+    -> idmaster int not null references master(id),
+    -> alamat text);
+Query OK, 0 rows affected (1.002 sec)
+
+MariaDB [dbpegawai]>

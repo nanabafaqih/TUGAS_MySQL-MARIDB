@@ -1,0 +1,755 @@
+Microsoft Windows [Version 10.0.19043.2006]
+(c) Microsoft Corporation. All rights reserved.
+--masuk ke tabel db_pegawai
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysql -u root -p db_pegawai
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [db_pegawai]> SHOW TABLES;
++----------------------+
+| Tables_in_db_pegawai |
++----------------------+
+| master               |
+| pegawai              |
++----------------------+
+2 rows in set (0.334 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM master;
++----+-----------+
+| id | nama      |
++----+-----------+
+|  1 | SDM       |
+|  2 | Keuangan  |
+|  3 | Marketing |
+|  4 | IT        |
++----+-----------+
+4 rows in set (1.911 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+
+18 rows in set (0.020 sec)
+
+MariaDB [db_pegawai]> ALTER TABLE pegawai ADD COLUMN berat_badan char(4);
+Query OK, 0 rows affected (1.030 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [db_pegawai]> DESC pegawai;
++-------------+---------------+------+-----+---------+----------------+
+| Field       | Type          | Null | Key | Default | Extra          |
++-------------+---------------+------+-----+---------+----------------+
+| id          | int(11)       | NO   | PRI | NULL    | auto_increment |
+| nip         | char(5)       | NO   | UNI | NULL    |                |
+| nama        | varchar(30)   | NO   |     | NULL    |                |
+| gender      | enum('p','l') | NO   |     | NULL    |                |
+| tmp_lahir   | varchar(30)   | NO   |     | NULL    |                |
+| tgl_lahir   | date          | NO   |     | NULL    |                |
+| idmaster    | int(11)       | NO   |     | NULL    |                |
+| alamat      | text          | YES  |     | NULL    |                |
+| berat_badan | char(4)       | YES  |     | NULL    |                |
++-------------+---------------+------+-----+---------+----------------+
+9 rows in set (0.452 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | NULL        |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | NULL        |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | NULL        |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | NULL        |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | NULL        |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | NULL        |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | NULL        |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | NULL        |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | NULL        |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | NULL        |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | NULL        |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | NULL        |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | NULL        |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | NULL        |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | NULL        |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | NULL        |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | NULL        |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | NULL        |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.004 sec)
+
+MariaDB [db_pegawai]> INSERT INTO pegawai(berat_badan)VALUES
+    -> (45);
+Query OK, 1 row affected, 5 warnings (0.295 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | NULL        |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | NULL        |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | NULL        |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | NULL        |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | NULL        |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | NULL        |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | NULL        |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | NULL        |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | NULL        |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | NULL        |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | NULL        |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | NULL        |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | NULL        |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | NULL        |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | NULL        |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | NULL        |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | NULL        |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | NULL        |
+| 21 |       |                         | p      |             | 0000-00-00 |        0 | NULL        | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+19 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> DELETE FROM pegawai WHERE id=21;
+Query OK, 1 row affected (0.238 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | NULL        |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | NULL        |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | NULL        |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | NULL        |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | NULL        |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | NULL        |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | NULL        |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | NULL        |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | NULL        |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | NULL        |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | NULL        |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | NULL        |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | NULL        |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | NULL        |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | NULL        |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | NULL        |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | NULL        |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | NULL        |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> UPDATE pegawai SET
+    -> berat_badan = 49
+    -> WHERE id=1;
+Query OK, 1 row affected (0.187 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 49          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | NULL        |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | NULL        |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | NULL        |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | NULL        |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | NULL        |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | NULL        |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | NULL        |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | NULL        |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | NULL        |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | NULL        |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | NULL        |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | NULL        |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | NULL        |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | NULL        |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | NULL        |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | NULL        |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | NULL        |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> UPDATE pegawai SET
+    -> berat_badan = 50
+    -> WHERE id=2;
+Query OK, 1 row affected (0.162 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> UPDATE pegawai SET
+    -> berat_badan = 48;
+Query OK, 18 rows affected (0.139 sec)
+Rows matched: 18  Changed: 18  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 48          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 48          |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | 48          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 48          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 48          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 48          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 48          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 48          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 48          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 48          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 48          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 48          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 48          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 48          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 48          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> UPDATE pegawai SET
+    -> berat_badan = 45
+    -> WHERE gender='p';
+Query OK, 11 rows affected (0.109 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 45          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | 45          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 48          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 45          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 45          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 45          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 48          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 48          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 45          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 45          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 48          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> UPDATE pegawai SET
+    -> berat_badan = 50
+    -> WHERE tmp_lahir = 'Probolinggo';
+Query OK, 11 rows affected (0.088 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | Probolinggo | 2001-07-02 |        1 | Besuk       | 50          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT(berat_badan) AS umur FROM pegawai;
++------+
+| umur |
++------+
+| 50   |
+| 45   |
+| 50   |
+| 50   |
+| 50   |
+| 50   |
+| 48   |
+| 50   |
+| 50   |
+| 50   |
+| 50   |
+| 48   |
+| 50   |
+| 45   |
+| 48   |
+| 50   |
+| 45   |
+| 45   |
++------+
+18 rows in set (0.496 sec)
+
+MariaDB [db_pegawai]> SELECT nip,nama,gender,(berat_badan)AS umur FROM pegawai;
++-------+-------------------------+--------+------+
+| nip   | nama                    | gender | umur |
++-------+-------------------------+--------+------+
+| 123   | Dina Wahyuni Suciati    | p      | 50   |
+| 10928 | Sayyid Rofiq Bafaqih    | p      | 45   |
+| 73836 | Nana Bafaqih            | p      | 50   |
+| 82667 | sayyid fikri alhamid    | l      | 50   |
+| 67368 | Wilda Ayuni Puspita     | p      | 50   |
+| 92782 | Endang Sugianti         | p      | 50   |
+| 92783 | Sudarman                | l      | 48   |
+| 92784 | Ahlia                   | p      | 50   |
+| 92785 | Ghaisan Ahmad Altamis   | l      | 50   |
+| 10289 | Bella Elena             | l      | 50   |
+| 92787 | Ahlia endar prawansa    | p      | 50   |
+| 92788 | Said Nur Muhammad       | l      | 48   |
+| 10294 | Muhammad Yunus          | p      | 50   |
+| 92790 | Putri Ayu Lestari       | p      | 45   |
+| 92791 | Isadur Rofiq            | l      | 48   |
+| 92792 | Muhsin Baaly            | l      | 50   |
+| 92793 | Sayrifah Intan Khodijah | p      | 45   |
+| 29019 | Muhammad Muhaimin       | p      | 45   |
++-------+-------------------------+--------+------+
+18 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT *FROM pegawai WHERE gender='l';
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                  | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+-------------+
+|  4 | 82667 | sayyid fikri alhamid  | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+|  7 | 92783 | Sudarman              | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  9 | 92785 | Ghaisan Ahmad Altamis | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 10 | 10289 | Bella Elena           | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 12 | 92788 | Said Nur Muhammad     | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 15 | 92791 | Isadur Rofiq          | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly          | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
++----+-------+-----------------------+--------+-------------+------------+----------+-------------+-------------+
+7 rows in set (0.362 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai WHERE tmp_lahir='Mesir';
++----+-------+-------------------+--------+-----------+------------+----------+--------+-------------+
+| id | nip   | nama              | gender | tmp_lahir | tgl_lahir  | idmaster | alamat | berat_badan |
++----+-------+-------------------+--------+-----------+------------+----------+--------+-------------+
+| 12 | 92788 | Said Nur Muhammad | l      | Mesir     | 1998-10-01 |        3 | kairo  | 48          |
++----+-------+-------------------+--------+-----------+------------+----------+--------+-------------+
+1 row in set (0.008 sec)
+
+MariaDB [db_pegawai]> UPDATE pegawai SET
+    -> tmp_lahir = 'JAKARTA'
+    -> WHERE id = 3;
+Query OK, 1 row affected (0.418 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.023 sec)
+
+MariaDB [db_pegawai]> SELECT nip,nama,gender,(tmp_lahir='JAKARTA'),tgl_lahir,idmaster,alamat,(berat_badan>30)AS umur FROM pegawai;
++-------+-------------------------+--------+-----------------------+------------+----------+-------------+------+
+| nip   | nama                    | gender | (tmp_lahir='JAKARTA') | tgl_lahir  | idmaster | alamat      | umur |
++-------+-------------------------+--------+-----------------------+------------+----------+-------------+------+
+| 123   | Dina Wahyuni Suciati    | p      |                     0 | 2001-07-20 |        1 | Alaskandang |    1 |
+| 10928 | Sayyid Rofiq Bafaqih    | p      |                     0 | 1998-12-05 |        1 | Probolinggo |    1 |
+| 73836 | Nana Bafaqih            | p      |                     1 | 2001-07-02 |        1 | Besuk       |    1 |
+| 82667 | sayyid fikri alhamid    | l      |                     0 | 2000-08-10 |        1 | Kraksaan    |    1 |
+| 67368 | Wilda Ayuni Puspita     | p      |                     0 | 2008-10-02 |        1 | Krampilan   |    1 |
+| 92782 | Endang Sugianti         | p      |                     0 | 1985-08-05 |        2 | Krampilan   |    1 |
+| 92783 | Sudarman                | l      |                     0 | 1992-10-01 |        2 | Creme       |    1 |
+| 92784 | Ahlia                   | p      |                     0 | 1994-09-09 |        2 | Pajarakan   |    1 |
+| 92785 | Ghaisan Ahmad Altamis   | l      |                     0 | 2010-10-10 |        2 | Randu Jalak |    1 |
+| 10289 | Bella Elena             | l      |                     0 | 2021-09-14 |        2 | malang      |    1 |
+| 92787 | Ahlia endar prawansa    | p      |                     0 | 1999-09-08 |        3 | Besuk       |    1 |
+| 92788 | Said Nur Muhammad       | l      |                     0 | 1998-10-01 |        3 | kairo       |    1 |
+| 10294 | Muhammad Yunus          | p      |                     0 | 1998-05-21 |        3 | bali        |    1 |
+| 92790 | Putri Ayu Lestari       | p      |                     0 | 2001-08-20 |        3 | malang      |    1 |
+| 92791 | Isadur Rofiq            | l      |                     0 | 1998-12-05 |        3 | Bungatan    |    1 |
+| 92792 | Muhsin Baaly            | l      |                     0 | 2000-10-06 |        4 | Alastengah  |    1 |
+| 92793 | Sayrifah Intan Khodijah | p      |                     0 | 2004-08-01 |        4 | Alaskandang |    1 |
+| 29019 | Muhammad Muhaimin       | p      |                     0 | 1998-10-25 |        4 | malang      |    1 |
++-------+-------------------------+--------+-----------------------+------------+----------+-------------+------+
+18 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.003 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai WHERE tmp_lahir='JAKARTA';
++----+-------+--------------+--------+-----------+------------+----------+--------+-------------+
+| id | nip   | nama         | gender | tmp_lahir | tgl_lahir  | idmaster | alamat | berat_badan |
++----+-------+--------------+--------+-----------+------------+----------+--------+-------------+
+|  3 | 73836 | Nana Bafaqih | p      | JAKARTA   | 2001-07-02 |        1 | Besuk  | 50          |
++----+-------+--------------+--------+-----------+------------+----------+--------+-------------+
+1 row in set (0.004 sec)
+
+MariaDB [db_pegawai]> SELECT (berat_badan)AS umur FROM pegawai WHERE tmp_lahir='JAKARTA';
++------+
+| umur |
++------+
+| 50   |
++------+
+1 row in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai WHERE nip=73836;
++----+-------+--------------+--------+-----------+------------+----------+--------+-------------+
+| id | nip   | nama         | gender | tmp_lahir | tgl_lahir  | idmaster | alamat | berat_badan |
++----+-------+--------------+--------+-----------+------------+----------+--------+-------------+
+|  3 | 73836 | Nana Bafaqih | p      | JAKARTA   | 2001-07-02 |        1 | Besuk  | 50          |
++----+-------+--------------+--------+-----------+------------+----------+--------+-------------+
+1 row in set (0.030 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai WHERE gender='p';
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+11 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai WHERE nip IN(10928,123);
++----+-------+----------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+-------------+
+2 rows in set (0.050 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai WHERE nip IN(10928,73836);
++----+-------+----------------------+--------+-----------+------------+----------+-------------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+----------------------+--------+-----------+------------+----------+-------------+-------------+
+|  2 | 10928 | Sayyid Rofiq Bafaqih | p      | Situbondo | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih         | p      | JAKARTA   | 2001-07-02 |        1 | Besuk       | 50          |
++----+-------+----------------------+--------+-----------+------------+----------+-------------+-------------+
+2 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai WHERE tmp_lahir NOT IN('Probolinggo','Malang');
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+7 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai ORDER BY nama DESC;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+|  3 | 73836 | Nana Bafaqih            | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.224 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai ORDER BY nama;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+|  1 | 123   | Dina Wahyuni Suciati    | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+|  3 | 73836 | Nana Bafaqih            | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+|  4 | 82667 | sayyid fikri alhamid    | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih    | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  5 | 67368 | Wilda Ayuni Puspita     | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+18 rows in set (0.002 sec)
+
+--urutan pegawai dari gemuk ke kurus
+MariaDB [db_pegawai]> SELECT (berat_badan)AS gemuk_kurus FROM pegawai ORDER BY gemuk_kurus DESC;
++-------------+
+| gemuk_kurus |
++-------------+
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 50          |
+| 48          |
+| 48          |
+| 48          |
+| 45          |
+| 45          |
+| 45          |
+| 45          |
++-------------+
+18 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai LIMIT 5;
++----+-------+----------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                 | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+-------------+
+|  1 | 123   | Dina Wahyuni Suciati | p      | Probolinggo | 2001-07-20 |        1 | Alaskandang | 50          |
+|  2 | 10928 | Sayyid Rofiq Bafaqih | p      | Situbondo   | 1998-12-05 |        1 | Probolinggo | 45          |
+|  3 | 73836 | Nana Bafaqih         | p      | JAKARTA     | 2001-07-02 |        1 | Besuk       | 50          |
+|  4 | 82667 | sayyid fikri alhamid | l      | Probolinggo | 2000-08-10 |        1 | Kraksaan    | 50          |
+|  5 | 67368 | Wilda Ayuni Puspita  | p      | Probolinggo | 2008-10-02 |        1 | Krampilan   | 50          |
++----+-------+----------------------+--------+-------------+------------+----------+-------------+-------------+
+5 rows in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT * FROM pegawai LIMIT 12 OFFSET 5;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+12 rows in set (0.038 sec)
+
+MariaDB [db_pegawai]> SELECT*FROM pegawai LIMIT 13 OFFSET 5;
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+| id | nip   | nama                    | gender | tmp_lahir   | tgl_lahir  | idmaster | alamat      | berat_badan |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+|  6 | 92782 | Endang Sugianti         | p      | probolinggo | 1985-08-05 |        2 | Krampilan   | 50          |
+|  7 | 92783 | Sudarman                | l      | Bondowoso   | 1992-10-01 |        2 | Creme       | 48          |
+|  8 | 92784 | Ahlia                   | p      | Probolinggo | 1994-09-09 |        2 | Pajarakan   | 50          |
+|  9 | 92785 | Ghaisan Ahmad Altamis   | l      | Probolinggo | 2010-10-10 |        2 | Randu Jalak | 50          |
+| 10 | 10289 | Bella Elena             | l      | Probolinggo | 2021-09-14 |        2 | malang      | 50          |
+| 11 | 92787 | Ahlia endar prawansa    | p      | Probolinggo | 1999-09-08 |        3 | Besuk       | 50          |
+| 12 | 92788 | Said Nur Muhammad       | l      | Mesir       | 1998-10-01 |        3 | kairo       | 48          |
+| 13 | 10294 | Muhammad Yunus          | p      | Probolinggo | 1998-05-21 |        3 | bali        | 50          |
+| 14 | 92790 | Putri Ayu Lestari       | p      | Malang      | 2001-08-20 |        3 | malang      | 45          |
+| 15 | 92791 | Isadur Rofiq            | l      | Situbondo   | 1998-12-05 |        3 | Bungatan    | 48          |
+| 16 | 92792 | Muhsin Baaly            | l      | Probolinggo | 2000-10-06 |        4 | Alastengah  | 50          |
+| 17 | 92793 | Sayrifah Intan Khodijah | p      | Prrbolinggo | 2004-08-01 |        4 | Alaskandang | 45          |
+| 18 | 29019 | Muhammad Muhaimin       | p      | Bali        | 1998-10-25 |        4 | malang      | 45          |
++----+-------+-------------------------+--------+-------------+------------+----------+-------------+-------------+
+13 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT COUNT(*)AS jumlah_pegawai FROM pegawai;
++----------------+
+| jumlah_pegawai |
++----------------+
+|             18 |
++----------------+
+1 row in set (0.086 sec)
+
+MariaDB [db_pegawai]> SELECT nip,nama,MAX(berat_badan)AS umur FROM pegawai;
++------+----------------------+------+
+| nip  | nama                 | umur |
++------+----------------------+------+
+| 123  | Dina Wahyuni Suciati | 50   |
++------+----------------------+------+
+1 row in set (0.094 sec)
+
+MariaDB [db_pegawai]> SELECT nip,nama,MAX(berat_badan)AS umur FROM pegawai ORDER BY umur DESC;
++------+----------------------+------+
+| nip  | nama                 | umur |
++------+----------------------+------+
+| 123  | Dina Wahyuni Suciati | 50   |
++------+----------------------+------+
+1 row in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT MAX(berat_badan)AS umur ,nip,nama FROM pegawai ORDER BY umur DESC;
++------+------+----------------------+
+| umur | nip  | nama                 |
++------+------+----------------------+
+| 50   | 123  | Dina Wahyuni Suciati |
++------+------+----------------------+
+1 row in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT MAX(berat_badan)AS umur FROM pegawai ORDER BY umur DESC;
++------+
+| umur |
++------+
+| 50   |
++------+
+1 row in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT AVG(berat_badan)AS umur FROM pegawai;
++-------------------+
+| umur              |
++-------------------+
+| 48.55555555555556 |
++-------------------+
+1 row in set (0.077 sec)
+
+MariaDB [db_pegawai]> SELECT COUNT(gender='l') AS jumlah_laki-laki FROM pegawai;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-laki FROM pegawai' at line 1
+MariaDB [db_pegawai]> SELECT COUNT(gender) AS jumlah_laki_laki FROM pegawai;
++------------------+
+| jumlah_laki_laki |
++------------------+
+|               18 |
++------------------+
+1 row in set (0.002 sec)
+
+MariaDB [db_pegawai]> SELECT COUNT(gender='l')AS jumlah_laki_laki FROM pegawai;
++------------------+
+| jumlah_laki_laki |
++------------------+
+|               18 |
++------------------+
+1 row in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT COUNT(*)AS jumlah_laki_laki FROM pegawai WHERE gender='l';
++------------------+
+| jumlah_laki_laki |
++------------------+
+|                7 |
++------------------+
+1 row in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT COUNT(*) AS jumlah_perempuan FROM pegawai WHERE gender='p';
++------------------+
+| jumlah_perempuan |
++------------------+
+|               11 |
++------------------+
+1 row in set (0.001 sec)
+
+MariaDB [db_pegawai]> SELECT SUM(berat_badan)AS jumlah_berat_badan FROM pegawai;
++--------------------+
+| jumlah_berat_badan |
++--------------------+
+|                874 |
++--------------------+
+1 row in set (0.021 sec)
+
+MariaDB [db_pegawai]> SELECT SUM(gender)AS total_pegawai FROM pegawai GROUP BY gender
+    -> HAVING total_pegawai >= 10;
++---------------+
+| total_pegawai |
++---------------+
+|            11 |
+|            14 |
++---------------+
+2 rows in set (0.169 sec)
+
+MariaDB [db_pegawai]> SELECT gender,SUM(gender) AS total_pegawai FROM pegawai GROUP BY gender
+    -> HAVING total_pegawai >= 10;
++--------+---------------+
+| gender | total_pegawai |
++--------+---------------+
+| p      |            11 |
+| l      |            14 |
++--------+---------------+
+2 rows in set (0.002 sec)
+
+MariaDB [db_pegawai]>

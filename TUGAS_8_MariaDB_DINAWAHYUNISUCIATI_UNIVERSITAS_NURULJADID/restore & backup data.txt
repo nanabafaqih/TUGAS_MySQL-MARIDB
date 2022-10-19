@@ -1,0 +1,50 @@
+Microsoft Windows [Version 10.0.19043.2130]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>sqlldump -u root -p dbrental_bus.sql
+'sqlldump' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysqldump -u root -p dbrental_bus.sql
+Enter password:
+-- MariaDB dump 10.19  Distrib 10.4.24-MariaDB, for Win64 (AMD64)
+--
+-- Host: localhost    Database: dbrental_bus.sql
+-- ------------------------------------------------------
+-- Server version       10.4.24-MariaDB
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+mysqldump: Got error: 1049: "Unknown database 'dbrental_bus.sql'" when selecting the database
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysqldump -u root -p dbrental_bus > D:\dbrentalbus.sql
+Enter password:
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 77
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> CREATE DATABASE db_rental_bus;
+Query OK, 1 row affected (0.039 sec)
+
+MariaDB [(none)]> \q
+Bye
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysql -u root -p db_rental_bus < D:\dbrentalbus.sql
+Enter password:
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>

@@ -1,0 +1,4 @@
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>mysqldump -u root -p db_rental_bus > D:\dbbackup_rentalbus.sql
+Enter password:
+
+D:\KM_3\ngobar FULLSTACK\coding\xampp\mysql\bin>

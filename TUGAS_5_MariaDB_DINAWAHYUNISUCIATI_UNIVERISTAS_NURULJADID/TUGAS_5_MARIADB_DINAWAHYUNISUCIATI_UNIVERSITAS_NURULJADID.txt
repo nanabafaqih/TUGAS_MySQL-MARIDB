@@ -1,0 +1,24 @@
+USE pos;
+SHOW TABLES;
+DESC offices;
+DESC employees;
+--  tugas 1 INNER JOIN TABLE employees (4 field bebas) dengan offices (3 field bebas)
+SELECT employees.employeeNumber,employees.lastName,employees.email,employees.jobTitle,offices.city,offices.phone,offices.addressLine1
+FROM employees INNER JOIN offices
+ON offices.officeCode = employees.officeCode;
+
+-- tugas 2 INNER JOIN TABLE employees (4 field bebas)dengan offices (3 field bebas) dengan mengaliaskan tabelnya
+SELECT em.employeeNumber,em.lastName,em.email,em.jobTitle,off.city,off.phone,off.addressLine1
+FROM employees em INNER JOIN offices off
+ON off.officeCode = em.officeCode;
+
+-- tugas 3 OUTER JOIN TABLE employees (4 field bebas) dengan offices (3 field bebas) dengan mengaliaskan tabelnya
+SELECT em.employeeNumber,em.lastName,em.email,em.jobTitle,off.city,off.phone,off.addressLine1
+FROM employees em RIGHT JOIN offices off
+ON off.officeCode = em.officeCode;
+
+-- OUTER JOIN TABLE employees (4 field bebas) dengan offices (3 field bebas) dengan mengaliaskan tabelnya
+SELECT em.employeeNumber,em.lastName,em.email,em.jobTitle,off.city,off.phone,off.addressLine1
+FROM employees em LEFT JOIN offices off
+ON off.officeCode = em.officeCode;
+

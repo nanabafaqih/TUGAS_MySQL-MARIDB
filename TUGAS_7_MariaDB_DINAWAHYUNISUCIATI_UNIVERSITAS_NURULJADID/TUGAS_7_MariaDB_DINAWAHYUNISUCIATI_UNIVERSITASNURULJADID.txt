@@ -1,0 +1,91 @@
+DELIMITER $$
+CREATE PROCEDURE inputPegawai(
+nama varchar(35),
+nip char(5),
+jabatan_id int,
+divisi_id int,
+gender enum('p','l'),
+tmp_lahir varchar(35),
+itgl_lahir date,
+alamat varchar(45))
+BEGIN 
+    INSERT INTO pegawai(nama,nip,jabatan_id,divisi_id,gender,tmp_lahir,tgl_lahir,alamat)
+    VALUES (nama,nip,idjbtn,idd,gender,tmp_lahir,tgl_lahir,alamat);
+END$$
+DELIMITER ;
+CALL inputPegawai('nanaa',90291,'manager',1,1,'p','probolinggo',2001-10-02,'alaskandang');
+
+-- kedua
+DELIMITER $$ 
+CREATE PROCEDURE showPegawai(idjbtn int)
+BEGIN
+    SELECT * FROM pegawai WHERE nama = nanaa;
+END$$
+
+DELIMITER ;
+
+CALL showPegawai(nama)
+
+
+DELIMITER $$
+CREATE PROCEDURE inputGaji(
+gajipokok char(35),
+tunjanganjabatan char(35),
+pegawai_id int
+)
+BEGIN
+INSERT INTO gaji(gajipokok,tunjanganjabatan,pegawai_id)
+VALUES (gapok,tunjab,idp);
+END $$
+CALL inputGaji(1500000,100000,1);
+
+-- 
+DELIMITER $$ 
+CREATE PROCEDURE showGaji(id_jbtn int)
+BEGIN
+    SELECT * FROM gaji WHERE id = 1;
+END$$
+
+DELIMITER ;
+
+CALL showGaji(id_jbtn)
+
+--
+DELIMITER $$
+ 
+CREATE PROCEDURE totalGaji(in gapok double, in tunjab int, out total double)
+BEGIN
+  SET total = gapok * tunjab;
+  SELECT @total;
+END$$
+
+DELIMITER ;
+CALL totalGaji(25000,4,@totalGaji);
+SELECT @totalGaji;
+--
+DELIMITER $$
+ 
+CREATE PROCEDURE totalGaji(in gapok double, in tunjab int, out total double)
+BEGIN
+  SET total = gapok * tunjab;
+  SELECT @total;
+END$$
+
+DELIMITER ;
+CALL totalGaji(25000,4,@totalGaji);
+SELECT @totalGaji;
+--
+SELECT pegawai.nip FROM pegawai;
+SELECT jabatan.nama AS posisi FROM jabatan INNER JOIN jabatan ON pegawai.jabatan_id = pegawai.id;
+SELECT divisi.nama AS departemen FROM divisi INNER JOIN divisi ON pegawai.divisi_id = pegawai.id ;
+SELECT gaji.gapok, gaji.tunjab FROM gaji INNER JOIN gaji ON pegawai.gaji_id =pegawai.id;
+SELECT @totalGaji(gapok,tunjab)FROM pegawai;
+
+
+--
+
+CREATE VIEW slip_gaji_pegawai_vw SELECT pegawai.nip FROM pegawai;
+SELECT jabatan.nama AS posisi FROM jabatan INNER JOIN jabatan ON pegawai.jabatan_id = pegawai.id;
+SELECT divisi.nama AS departemen FROM divisi INNER JOIN divisi ON pegawai.divisi_id = pegawai.id ;
+SELECT gaji.gapok, gaji.tunjab FROM gaji INNER JOIN gaji ON pegawai.gaji_id =pegawai.id;
+SELECT @totalGaji(gapok,tunjab)FROM pegawai;
